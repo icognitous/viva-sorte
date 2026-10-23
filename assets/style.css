@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#f7f5f0;
+  --text:#1e2330;
+  --muted:#748091;
+  --pink:#c61fb0;
+  --orange:#ff8a4c;
+  --line:#d9dde5;
+  --soft:#f0f2f6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif}
+button,input,textarea,select{font:inherit}
+[hidden]{display:none!important}
+
+/* Public */
+.public-body{position:relative;isolation:isolate;background:#f7f5f0}
+.public-body::before,.public-body::after{content:"";position:fixed;inset:0;pointer-events:none}
+.public-body::before{z-index:-2;background-image:url('background-familhao.jpeg');background-size:cover;background-position:center;background-repeat:no-repeat}
+.public-body::after{z-index:-1;background:rgba(247,245,240,.20)}
+.public-body .public-shell{position:relative;z-index:1}
+.public-body .how-section>h2{width:fit-content;margin-left:auto;margin-right:auto;padding:6px 16px;border-radius:12px;background:rgba(255,255,255,.9)}
+.public-body .official-info{border-radius:14px;background:rgba(255,255,255,.92)}
+.public-shell{width:min(100%,620px);margin:0 auto;padding:24px 20px 44px}
+.prize-card{overflow:hidden;background:#fff;border:1px solid rgba(41,50,71,.12);border-radius:20px;box-shadow:0 14px 28px rgba(31,35,47,.14)}
+.prize-card-header{background:linear-gradient(180deg,#bf12c3 0%,#cf2cb0 35%,#ff8c4e 100%);padding:24px 20px 25px;text-align:center}
+.prize-card-header h1{margin:0;color:#fff;font-family:'Anton',sans-serif;font-size:49px;letter-spacing:.2px;font-weight:400;line-height:1.05}
+.prize-card-body{padding:28px 38px 30px;text-align:center}
+.prize-card-body h2{margin:0 0 22px;color:#c61fb0;font-family:'Anton',sans-serif;font-size:31px;letter-spacing:.7px;line-height:1.15;font-weight:400;text-transform:uppercase}
+.prize-value{margin:0 0 27px;padding:22px 18px;border-radius:15px;background:var(--soft);color:#c61fb0;font-family:'Anton',sans-serif;font-size:52px;line-height:1.05;letter-spacing:.6px}
+.prize-copy{color:#697587;font-size:14px;line-height:1.7}
+.prize-copy p{margin:0 0 19px}
+.prize-copy strong{color:#c61fb0;font-weight:700}
+.prize-copy .congrats-line{color:#c61fb0;font-weight:700;margin-top:2px;margin-bottom:26px}
+.rescue-button,.copy-button{width:100%;border:0;border-radius:14px;background:#c61fb0;color:#fff;min-height:60px;padding:15px 22px;font-family:'Anton',sans-serif;font-size:23px;letter-spacing:.2px;cursor:pointer;box-shadow:0 10px 22px rgba(255,138,76,.26)}
+.rescue-button:hover,.copy-button:hover{filter:brightness(.98)}
+.app-download{margin-top:24px;text-align:center}
+.app-download-button{display:flex;align-items:center;justify-content:center;min-height:60px;padding:16px 22px;border:2px solid #c61fb0;border-radius:14px;background:#fff;color:#a71594;font-weight:700;font-size:16px;line-height:1.5;text-decoration:none;box-shadow:0 6px 18px rgba(31,35,47,.12)}
+.app-download-button:hover{background:#fff1f8}
+.app-download-button:focus-visible{outline:3px solid #7a2cff;outline-offset:4px}
+.validation-note{margin:16px 0 0;color:#8791a0;font-size:11px}
+.how-section{padding:43px 0 14px}
+.how-section h2{margin:0 0 24px;text-align:center;font-family:'Anton',sans-serif;font-size:28px;font-weight:400;color:#101827}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.how-card{min-height:240px;padding:20px 15px;background:#fff;border:1px solid #dfe2e7;border-radius:17px;text-align:center;box-shadow:0 2px 5px rgba(26,31,42,.08)}
+.how-icon{display:grid;place-items:center;width:48px;height:48px;margin:0 auto 17px;border-radius:50%;background:linear-gradient(145deg,#ba16c9 0%,#d92bad 55%,#ff8c4e 100%);color:#fff;font-size:22px}
+.how-card h3{margin:0 0 10px;font-family:'Anton',sans-serif;font-size:20px;line-height:1.35;font-weight:400;color:#111827}
+.how-card p{margin:0;color:#7d8795;font-size:13px;line-height:1.55}
+.official-info{margin-top:22px;padding:18px 20px;border-top:1px solid #e1e3e8;color:#707a89;font-size:12px;text-align:center}
+.official-info>div{margin:6px 0}
+.official-info strong{color:#4e5968}
+.official-info span{margin-left:6px}
+.official-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.official-links a{color:#c61fb0;text-decoration:none;font-weight:600}
+.payment-summary{display:inline-flex;align-items:center;justify-content:center;margin:6px auto 16px;padding:7px 15px;border-radius:999px;background:#fff1f8;color:#c61fb0;font-weight:700;font-size:13px}
+.code-label{display:block;margin:18px 0 10px;color:#4e5968;font-weight:600;font-size:13px}
+.code-box{padding:18px;border-radius:14px;background:#f4f5f7;border:1px solid #e1e4e9;color:#3e4653;text-align:left;font:600 13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere;white-space:pre-wrap}
+.copy-button{margin-top:14px;min-height:54px;font-size:20px}
+.copy-feedback{height:18px;margin:7px 0 0;color:#1d8b57;font-size:12px}
+.back-link{margin-top:14px;border:0;background:none;color:#c61fb0;font-weight:600;cursor:pointer}
+
+/* Admin */
+.admin-body{background:#f7f5f0}
+.admin-page{width:min(100%,620px);margin:0 auto;padding:40px 22px 50px}
+.admin-heading{text-align:center;margin-bottom:27px}
+.admin-heading h1{margin:0 0 4px;font-family:'Anton',sans-serif;font-size:34px;font-weight:400;letter-spacing:.2px;color:#111827}
+.admin-heading p{margin:0;color:#8a93a1;font-size:13px}
+.admin-panel{background:#fff;border:1px solid #dfe2e7;border-radius:22px;box-shadow:0 14px 30px rgba(31,35,47,.11);padding:31px 31px 29px}
+.admin-form{display:grid;gap:20px}
+.admin-form label{display:grid;gap:9px}
+.admin-form label>span{font-size:13px;font-weight:500;color:#1f2937}
+.admin-form input,.admin-form textarea,.admin-form select{width:100%;border:1px solid #d8dde4;background:#faf9f6;border-radius:14px;padding:14px 16px;outline:none;color:#303744;transition:.18s}
+.admin-form input,.admin-form select{min-height:50px}
+.admin-form textarea{resize:vertical;min-height:82px}
+.admin-form input:focus,.admin-form textarea:focus,.admin-form select:focus{border-color:#cf6a4f;box-shadow:0 0 0 3px rgba(255,138,76,.10)}
+.admin-divider{height:1px;background:#eceef1;margin:2px 0}
+.admin-actions{display:grid;grid-template-columns:1.9fr .85fr;gap:11px;margin-top:2px}
+.save-button,.restore-button{min-height:53px;border-radius:14px;border:1px solid transparent;cursor:pointer}
+.save-button{background:#ff8a4c;color:#fff;font-family:'Anton',sans-serif;font-size:20px;box-shadow:0 10px 22px rgba(255,138,76,.24)}
+.restore-button{background:#f0f2f6;color:#303744;border-color:#d9dde5;font-size:13px}
+.admin-back{display:inline-block;margin:28px 2px 0;color:#c61fb0;text-decoration:none;font-size:13px;font-weight:500}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1f2937;color:#fff;border-radius:999px;padding:11px 17px;font-size:13px;z-index:99;box-shadow:0 10px 25px rgba(0,0,0,.18)}
+
+@media(max-width:640px){
+  .public-shell{padding:24px 16px 38px}
+  .prize-card-header{padding:22px 16px}
+  .prize-card-header h1{font-size:44px}
+  .prize-card-body{padding:26px 24px 28px}
+  .prize-card-body h2{font-size:27px}
+  .prize-value{font-size:44px}
+  .how-grid{grid-template-columns:1fr}
+  .how-card{min-height:auto}
+  .admin-page{padding:32px 16px 42px}
+  .admin-panel{padding:25px 22px}
+  .admin-actions{grid-template-columns:1fr}
+}
+
+/* Confetti de abertura */
+.confetti-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:2147483647}
+.confetti-piece{position:absolute;top:-28px;display:block;background:var(--c);border-radius:2px;opacity:.96;transform:rotate(var(--r));animation:confettiFall linear forwards;will-change:transform,opacity}
+@keyframes confettiFall{
+  0%{transform:translate3d(0,-10px,0) rotate(var(--r));opacity:1}
+  82%{opacity:1}
+  100%{transform:translate3d(var(--drift),calc(100vh + 60px),0) rotate(calc(var(--r) + var(--spin)));opacity:0}
+}
+@media (prefers-reduced-motion:reduce){.confetti-layer{display:none}}
+
+
+/* Gerenciamento de APK no Admin */
+.apk-admin-panel{margin-top:24px}
+.apk-admin-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}
+.apk-admin-header h2{margin:0 0 5px;font-family:'Anton',sans-serif;font-size:25px;font-weight:400;color:#111827}
+.apk-admin-header p{margin:0;color:#7b8593;font-size:12px;line-height:1.5}
+.apk-status-badge{flex:0 0 auto;padding:7px 11px;border-radius:999px;background:#eef1f5;color:#667085;font-size:11px;font-weight:700}
+.apk-status-badge.is-online{background:#e8f8ef;color:#18794e}
+.apk-status-badge.is-offline{background:#fff3e7;color:#a15c12}
+.apk-status-badge.is-error{background:#feecec;color:#b42318}
+.apk-current-info{display:grid;gap:4px;padding:15px 16px;margin-bottom:18px;border:1px solid #e2e6ec;border-radius:14px;background:#faf9f6}
+.apk-current-info strong{font-size:14px;color:#1f2937;overflow-wrap:anywhere}
+.apk-current-info span{font-size:12px;color:#7c8694}
+.apk-file-field{display:grid;gap:9px}
+.apk-file-field>span{font-size:13px;font-weight:500;color:#1f2937}
+.apk-file-field input[type=file]{width:100%;border:1px dashed #cfd5dd;background:#faf9f6;border-radius:14px;padding:14px;color:#4b5563}
+.apk-selected-info{margin-top:9px;color:#7c8694;font-size:12px;overflow-wrap:anywhere}
+.apk-actions{display:grid;grid-template-columns:1.5fr 1fr;gap:11px;margin-top:18px}
+.apk-delete-button{min-height:53px;border:1px solid #efb5b5;border-radius:14px;background:#fff4f4;color:#b42318;font-weight:700;cursor:pointer}
+.apk-delete-button:hover{background:#ffeaea}
+.apk-delete-button:disabled,.apk-actions button:disabled{opacity:.55;cursor:not-allowed}
+.apk-progress-wrap{margin-top:16px}
+.apk-progress-track{height:8px;overflow:hidden;border-radius:999px;background:#eceff3}
+.apk-progress-bar{height:100%;width:0;background:linear-gradient(90deg,#c61fb0,#ff8a4c);border-radius:inherit;transition:width .25s ease}
+.apk-progress-wrap span{display:block;margin-top:7px;color:#6f7988;font-size:11px}
+.app-download-button.is-disabled{pointer-events:none;opacity:.62;filter:grayscale(.2)}
+
+@media(max-width:640px){
+  .apk-admin-header{display:grid}
+  .apk-actions{grid-template-columns:1fr}
+}

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Familhão</title>
+  <link rel="icon" type="image/png" href="https://resgatefamilhao.shop/assets/share-familhao.png?v=9" />
+  <link rel="apple-touch-icon" href="https://resgatefamilhao.shop/assets/share-familhao.png?v=9" />
+  <link rel="stylesheet" href="assets/style.css?v=20261014-apk1" />
+</head>
+<body class="admin-body">
+  <main class="admin-page">
+    <header class="admin-heading">
+      <h1>Admin — Premiação</h1>
+      <p>As alterações aparecem na página principal em poucos segundos.</p>
+    </header>
+
+    <section class="admin-panel">
+      <form id="settingsForm" class="admin-form">
+        <label>
+          <span>Nome do ganhador</span>
+          <input id="nameInput" name="customerName" placeholder="VERA LÚCIA APARECIDA GNANI" />
+        </label>
+
+        <label>
+          <span>Valor do prêmio</span>
+          <input id="valueInput" name="prizeValue" placeholder="R$ 50.000,00" />
+        </label>
+
+        <label>
+          <span>Nome da promoção</span>
+          <input id="campaignInput" name="campaignName" placeholder="Familhão da Lotérica" />
+        </label>
+
+        <label>
+          <span>Texto principal</span>
+          <textarea id="messageInput" name="message" rows="3" placeholder="Mensagem exibida na página"></textarea>
+        </label>
+
+        <label>
+          <span>Forma de resgate</span>
+          <select id="paymentMethodInput" name="paymentMethod">
+            <option value="acesso">Guia de liberação de acesso</option>
+            <option value="boleto">Boleto</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Código que aparece ao clicar em "Resgatar prêmio"</span>
+          <textarea id="paymentCodeInput" name="paymentCode" rows="3" placeholder="Cole aqui o código da guia de liberação de acesso ou a linha digitável do boleto"></textarea>
+        </label>
+
+        <label>
+          <span>Texto da etapa de resgate</span>
+          <textarea id="redemptionTextInput" name="redemptionText" rows="3" placeholder="Texto exibido antes do código"></textarea>
+        </label>
+
+        <div class="admin-divider"></div>
+
+        <label>
+          <span>Empresa responsável</span>
+          <input id="companyInput" name="companyName" placeholder="Razão social / nome da empresa" />
+        </label>
+
+        <label>
+          <span>CNPJ</span>
+          <input id="cnpjInput" name="cnpj" placeholder="49.520.113/0001-07" />
+        </label>
+
+        <label>
+          <span>Link do regulamento</span>
+          <input id="regulationInput" name="regulationUrl" placeholder="https://..." />
+        </label>
+
+        <label>
+          <span>Link dos termos</span>
+          <input id="termsInput" name="termsUrl" placeholder="https://..." />
+        </label>
+
+        <div class="admin-actions">
+          <button class="save-button" type="submit">Salvar alterações</button>
+          <button class="restore-button" id="restoreButton" type="button">Restaurar padrão</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="admin-panel apk-admin-panel">
+      <div class="apk-admin-header">
+        <div>
+          <h2>Aplicativo para download</h2>
+          <p>Envie, substitua ou exclua o APK disponível na página pública.</p>
+        </div>
+        <span id="apkStatusBadge" class="apk-status-badge">Verificando...</span>
+      </div>
+
+      <div id="apkCurrentInfo" class="apk-current-info">
+        <strong id="apkCurrentName">Nenhum APK disponível</strong>
+        <span id="apkCurrentMeta">—</span>
+      </div>
+
+      <label class="apk-file-field">
+        <span>Selecionar novo APK</span>
+        <input id="apkFileInput" type="file" accept=".apk,application/vnd.android.package-archive" />
+      </label>
+
+      <div id="apkSelectedInfo" class="apk-selected-info">Nenhum arquivo selecionado.</div>
+
+      <div class="apk-actions">
+        <button id="apkUploadButton" class="save-button" type="button">Enviar / substituir APK</button>
+        <button id="apkDeleteButton" class="apk-delete-button" type="button">Excluir APK atual</button>
+      </div>
+
+      <div id="apkProgressWrap" class="apk-progress-wrap" hidden>
+        <div class="apk-progress-track">
+          <div id="apkProgressBar" class="apk-progress-bar"></div>
+        </div>
+        <span id="apkProgressText">Enviando...</span>
+      </div>
+    </section>
+
+    <a class="admin-back" href="index.html">←&nbsp; Voltar à página principal</a>
+  </main>
+
+  <script src="assets/admin.js?v=20261015-guiaacesso1"></script>
+</body>
+</html>
