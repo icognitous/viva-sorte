@@ -227,7 +227,10 @@ async function uploadApk(){
     console.error(error);
     if(error.message==='TOKEN_REQUIRED') toast('Envio cancelado: token não informado.');
     else if(error.message==='UNAUTHORIZED') toast('Token incorreto. Tente novamente.');
-    else toast('Erro ao enviar o APK. Tente novamente.',3500);
+    else {
+      const detail=(error?.message||'Erro desconhecido').replace(/^HTTP\s*/,'');
+      toast('Erro ao enviar APK: '+detail,6000);
+    }
   }finally{
     setApkBusy(false);
     await loadApkStatus();
