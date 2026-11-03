@@ -2,6 +2,7 @@ const WORKER_BASE='https://download.resgatefamilhao.shop';
 const API_URL=WORKER_BASE+'/config';
 const APK_URL=WORKER_BASE+'/apk';
 const APK_UPLOAD_URL=WORKER_BASE+'/apk/upload';
+const APK_DELETE_URL=WORKER_BASE+'/apk/delete';
 const APK_STATUS_URL=WORKER_BASE+'/apk/status';
 const STORAGE_KEY='campanha-premiada-settings';
 const TOKEN_KEY='viva-sorte-admin-token';
@@ -251,27 +252,42 @@ async function uploadApk(){
 async function deleteApk(){
   if(!confirm('Tem certeza que deseja excluir o APK atual? O botão de download ficará indisponível até um novo APK ser enviado.')) return;
 
+  const token=getAdminToken();
+  if(!token){
+    toast('Exclusão cancelada: token não informado.');
+    return;
+  }
+
   setApkBusy(true,'Excluindo APK...');
 
   try{
-    const response=await fetch(APK_URL,{
-      method:'DELETE',
-      headers:authHeaders()
+    const form=new FormData();
+    form.append('token',token);
+
+    const response=await fetch(APK_DELETE_URL,{
+      method:'POST',
+      body:form
     });
 
-    handleUnauthorized(response);
+    if(response.status===401){
+      sessionStorage.removeItem(TOKEN_KEY);
+      throw new Error('UNAUTHORIZED');
+    }
 
     if(!response.ok){
       const text=await response.text().catch(()=> '');
       throw new Error('HTTP '+response.status+' '+text);
     }
 
-    toast('APK excluído com sucesso.');
+    const data=await response.json().catch(()=>({}));
+    toast(data.message||'APK excluído com sucesso.');
   }catch(error){
     console.error(error);
-    if(error.message==='TOKEN_REQUIRED') toast('Exclusão cancelada: token não informado.');
-    else if(error.message==='UNAUTHORIZED') toast('Token incorreto. Tente novamente.');
-    else toast('Erro ao excluir o APK.',3500);
+    if(error.message==='UNAUTHORIZED') toast('Token incorreto. Tente novamente.');
+    else {
+      const detail=(error?.message||'Erro desconhecido').replace(/^HTTP\s*/,'');
+      toast('Erro ao excluir APK: '+detail,6000);
+    }
   }finally{
     setApkBusy(false);
     await loadApkStatus();
