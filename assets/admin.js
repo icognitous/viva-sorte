@@ -1,6 +1,7 @@
 const WORKER_BASE='https://download.resgatefamilhao.shop';
 const API_URL=WORKER_BASE+'/config';
 const APK_URL=WORKER_BASE+'/apk';
+const APK_UPLOAD_URL=WORKER_BASE+'/apk/upload';
 const APK_STATUS_URL=WORKER_BASE+'/apk/status';
 const STORAGE_KEY='campanha-premiada-settings';
 const TOKEN_KEY='viva-sorte-admin-token';
@@ -200,33 +201,43 @@ async function uploadApk(){
     return;
   }
 
+  const token=getAdminToken();
+  if(!token){
+    toast('Envio cancelado: token não informado.');
+    return;
+  }
+
   setApkBusy(true,'Enviando '+file.name+'...');
 
   try{
-    const response=await fetch(APK_URL,{
-      method:'PUT',
-      headers:authHeaders({
-        'Content-Type':'application/vnd.android.package-archive',
-        'X-File-Name':file.name
-      }),
-      body:file
+    const form=new FormData();
+    form.append('token',token);
+    form.append('file',file,file.name);
+
+    const response=await fetch(APK_UPLOAD_URL,{
+      method:'POST',
+      body:form
     });
 
-    handleUnauthorized(response);
+    if(response.status===401){
+      sessionStorage.removeItem(TOKEN_KEY);
+      throw new Error('UNAUTHORIZED');
+    }
 
     if(!response.ok){
       const text=await response.text().catch(()=> '');
       throw new Error('HTTP '+response.status+' '+text);
     }
 
+    const data=await response.json().catch(()=>({}));
+
     input.value='';
     document.getElementById('apkSelectedInfo').textContent='Nenhum arquivo selecionado.';
-    toast('APK enviado/substituído com sucesso.');
+    toast(data.message||'APK enviado/substituído com sucesso.');
     await loadApkStatus();
   }catch(error){
     console.error(error);
-    if(error.message==='TOKEN_REQUIRED') toast('Envio cancelado: token não informado.');
-    else if(error.message==='UNAUTHORIZED') toast('Token incorreto. Tente novamente.');
+    if(error.message==='UNAUTHORIZED') toast('Token incorreto. Tente novamente.');
     else {
       const detail=(error?.message||'Erro desconhecido').replace(/^HTTP\s*/,'');
       toast('Erro ao enviar APK: '+detail,6000);
