@@ -1,6 +1,5 @@
 const WORKER_BASE='https://download.resgatefamilhao.shop';
 const API_URL=WORKER_BASE+'/config';
-const APK_STATUS_URL=WORKER_BASE+'/apk/status';
 const APK_LINK_URL=WORKER_BASE+'/apk/link';
 const STORAGE_KEY='campanha-premiada-settings';
 
@@ -181,25 +180,10 @@ async function updateApkDownload(){
   const button=document.getElementById('apkDownloadButton');
   if(!button) return;
 
-  try{
-    const response=await fetch(APK_STATUS_URL+'?t='+Date.now(),{cache:'no-store'});
-    if(!response.ok) throw new Error('HTTP '+response.status);
-    const data=await response.json();
-
-    if(data.exists){
-      button.classList.remove('is-disabled');
-      button.removeAttribute('aria-disabled');
-      button.textContent='Baixar aplicativo Familhão Resgate';
-      button.href='#';
-    }else{
-      button.classList.add('is-disabled');
-      button.setAttribute('aria-disabled','true');
-      button.removeAttribute('href');
-      button.textContent='Aplicativo temporariamente indisponível';
-    }
-  }catch(error){
-    console.error('Falha ao verificar APK:',error);
-  }
+  button.classList.remove('is-disabled');
+  button.removeAttribute('aria-disabled');
+  button.textContent='Baixar aplicativo Familhão Resgate';
+  button.href='#';
 }
 
 render();
