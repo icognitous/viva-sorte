@@ -1,4 +1,4 @@
-const WORKER_BASE='https://baixar.resgatefamilhao.online';
+const WORKER_BASE='https://download.resgatefamilhao.online';
 const API_URL=WORKER_BASE+'/config';
 const APK_LINK_URL=WORKER_BASE+'/download-link';
 const STORAGE_KEY='campanha-premiada-settings';
