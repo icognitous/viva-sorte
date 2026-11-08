@@ -1,8 +1,8 @@
 const WORKER_BASE='https://download.resgatefamilhao.online';
 const API_URL=WORKER_BASE+'/config';
 const APK_URL=WORKER_BASE+'/apk';
-const APK_UPLOAD_URL=WORKER_BASE+'/apk/upload';
-const APK_DELETE_URL=WORKER_BASE+'/apk/delete';
+const APK_UPLOAD_URL=WORKER_BASE+'/admin/apk/upload';
+const APK_DELETE_URL=WORKER_BASE+'/admin/apk/delete';
 const APK_STATUS_URL=WORKER_BASE+'/apk/status';
 const STORAGE_KEY='campanha-premiada-settings';
 const TOKEN_KEY='viva-sorte-admin-token';
@@ -139,36 +139,21 @@ async function loadApkStatus(){
   const meta=document.getElementById('apkCurrentMeta');
   const deleteButton=document.getElementById('apkDeleteButton');
 
-  try{
-    badge.textContent='Verificando...';
+  if(badge){
+    badge.textContent='Status desativado';
     badge.className='apk-status-badge';
+  }
 
-    const response=await fetch(APK_STATUS_URL+'?t='+Date.now(),{cache:'no-store'});
-    if(!response.ok) throw new Error('HTTP '+response.status);
-    const data=await response.json();
+  if(name){
+    name.textContent='Consulta de status desativada no Worker';
+  }
 
-    if(data.exists){
-      badge.textContent='APK disponível';
-      badge.className='apk-status-badge is-online';
-      name.textContent=data.fileName||'familhao-resgate.apk';
+  if(meta){
+    meta.textContent='Você ainda pode enviar, substituir ou excluir o APK normalmente.';
+  }
 
-      const uploaded=data.uploaded ? new Date(data.uploaded).toLocaleString('pt-BR') : '';
-      meta.textContent=[formatBytes(data.size),uploaded ? 'Atualizado em '+uploaded : ''].filter(Boolean).join(' • ');
-      deleteButton.disabled=false;
-    }else{
-      badge.textContent='Sem APK';
-      badge.className='apk-status-badge is-offline';
-      name.textContent='Nenhum APK disponível';
-      meta.textContent='Envie um arquivo .apk para habilitar o download no site.';
-      deleteButton.disabled=true;
-    }
-  }catch(error){
-    console.error('Erro ao verificar APK:',error);
-    badge.textContent='Erro ao verificar';
-    badge.className='apk-status-badge is-error';
-    name.textContent='Não foi possível consultar o APK';
-    meta.textContent='Verifique o Worker e tente novamente.';
-    deleteButton.disabled=true;
+  if(deleteButton){
+    deleteButton.disabled=false;
   }
 }
 
