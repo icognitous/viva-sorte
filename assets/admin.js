@@ -1,4 +1,4 @@
-const WORKER_BASE='https://download.resgatefamilhao.shop';
+const WORKER_BASE='https://baixar.resgatefamilhao.online';
 const API_URL=WORKER_BASE+'/config';
 const APK_URL=WORKER_BASE+'/apk';
 const APK_UPLOAD_URL=WORKER_BASE+'/apk/upload';
